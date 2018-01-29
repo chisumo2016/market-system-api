@@ -27,7 +27,7 @@ class CreateProductsTable extends Migration
             //Foreign Keys
 
             $table->foreign('seller_id')->references('id')->on('users');
-            
+
         });
     }
 
