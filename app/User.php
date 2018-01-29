@@ -7,6 +7,15 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    const  VERIFIED_USER = 1;
+    const  UNVERIFIED_USER = 0;
+
+
+    const   ADMIN_USER ='true';
+    const   REGULAR_USER ='false';
+
+
+
     use Notifiable;
 
     /**
@@ -15,7 +24,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'verified','verification_token', 'admin'
     ];
 
     /**
@@ -24,6 +33,22 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'verification_token'
     ];
+
+
+    public  function  isVerified()
+    {
+        return $this->verified == User::VERIFIED_USER;
+    }
+
+    public  function  unVerified()
+    {
+        return $this->admin == User::ADMIN_USER;
+    }
+
+    public  static  function  genarateVerificationCode()
+    {
+        return str_random(40);
+    }
 }
