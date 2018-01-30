@@ -2,11 +2,14 @@
 
 namespace App\Exceptions;
 
+use App\Traits\ApiResponser;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
+    use ApiResponser;
     /**
      * A list of the exception types that are not reported.
      *
@@ -14,6 +17,7 @@ class Handler extends ExceptionHandler
      */
     protected $dontReport = [
         //
+
     ];
 
     /**
@@ -48,6 +52,23 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof  ValidationException){
+            return $this->convertValidationExceptionToResponse($exception, $request);
+        }
         return parent::render($request, $exception);
+    }
+
+
+/**
+* Create a Symfony response for the given exception.
+*
+* @param  \Exception  $e
+* @return mixed
+*/
+    protected function convertExceptionToResponse(validationException $e, $request)
+    {
+        $errors = $e->validator->errors()->getMessages();
+         return $this->errorResponse($errors, 422);
+         //return response()->json($errors, 422);
     }
 }
