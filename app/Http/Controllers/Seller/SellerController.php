@@ -17,7 +17,9 @@ class SellerController extends ApiController
     {
         //
         $seller = Seller::has('products')->get();
-        return response()->json(['data' => $seller], 200);
+         return $this->showAll($seller);
+
+        //return response()->json(['data' => $seller], 200);
     }
 
     /**
@@ -30,7 +32,8 @@ class SellerController extends ApiController
     {
         //
         $seller = Seller::has('products')->findOrFail($id);
-        return response()->json(['data' => $seller], 200);
+        return $this->showOne($seller);
+        //return response()->json(['data' => $seller], 200);
     }
 
 
