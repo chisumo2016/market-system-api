@@ -5,6 +5,7 @@ use App\Category;
 use App\Product;
 use App\Transaction;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -42,11 +43,11 @@ class DatabaseSeeder extends Seeder
 
         factory(Product::class,    $productsQuantity)->create()->each(
             function ($product){
-                $categories = Category::all()->random(mt_random(1, 15))->pluck('id');
+                $categories = Category::all()->random(mt_rand(1, 15))->pluck('id');
                 //Attach
                 $product -> categories()->attach($categories);
             });
-        
+
         factory(Transaction::class, $transactionsQuantity)->create();
 
     }
