@@ -128,7 +128,7 @@ class UserController extends Controller
         if (!$user->isDirty()) {
             return response()->json(['error' => 'You need to specify a different value to update ' , 'code' => 422], 422 );
         }
-        
+
         $user->save();
         return  response()->json(['data' => $user], 200);  //return $users;
 
@@ -143,5 +143,8 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return  response()->json(['data' => $user], 200);  
     }
 }
