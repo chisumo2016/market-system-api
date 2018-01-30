@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Buyer;
 
 use App\Buyer;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ApiController;//use App\Http\Controllers\Controller;
 
-class BuyerController extends Controller
+class BuyerController extends ApiController    // class BuyerController extends Controller
 {
     /**
      * Display a listing of the resource.
