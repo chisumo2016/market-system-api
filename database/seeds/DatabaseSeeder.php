@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
 
         //Define some variable to show how much user
 
-        $usersQuantity = 200;
+        $usersQuantity = 1000;
         $categoriesQuantity = 30;
         $productsQuantity = 1000;
         $transactionsQuantity = 1000;
