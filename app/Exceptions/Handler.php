@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use App\Traits\ApiResponser;
 use Exception;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
@@ -67,6 +68,18 @@ class Handler extends ExceptionHandler
             return parent::render($request, $exception);
     }
 
+     // Handling AuthenticationException
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        return $this->errorResponse('Unauthenticated .', 401);
+
+        /*return $request->expectsJson()
+            ? response()->json(['message' => 'Unauthenticated.'], 401)
+            : redirect()->guest(route('authentication.index'));*/
+
+
+    }
+
 
 /**
 * Create a Symfony response for the given exception.
@@ -80,4 +93,6 @@ class Handler extends ExceptionHandler
          return $this->errorResponse($errors, 422);
          //return response()->json($errors, 422);
     }
+
+
 }
