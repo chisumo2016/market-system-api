@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Seller;
 use App\Traits\ApiResponser;
 use App\User;
 use Illuminate\Http\Request;
@@ -67,11 +68,11 @@ class UserController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Seller $seller)
     {
         //
         //$user = User:: findOrFail($user); //We cant use anymore as we're using model binding
-        return $this->showOne($user);
+        return $this->showOne($seller);
         //return  response()->json(['data' => $user], 200);  //return $users;
 
 

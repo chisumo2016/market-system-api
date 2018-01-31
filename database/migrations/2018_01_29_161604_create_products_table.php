@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->string('image');
             $table->integer('seller_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
 
             //Foreign Keys
 
