@@ -87,7 +87,7 @@ class Handler extends ExceptionHandler
             return $this->errorResponse($exception->getMessage(), $exception->getStatusCode());
         }
 
-        if($exception instanceof  QueryException){ // Handle the HttpException
+        if($exception instanceof  QueryException){ // Handle the Query
            $errorCode =  $exception -> errorInfo[1];
 
            if ($errorCode == 1451) {
@@ -95,7 +95,12 @@ class Handler extends ExceptionHandler
            }
         }
 
+        if(config('app.debug')){
+            return parent::render($request, $exception);
+        }
+        return $this->errorResponse('Unexpected Exception.  Try later', 500);
 
+        //
 
     }
 
@@ -103,11 +108,6 @@ class Handler extends ExceptionHandler
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         return $this->errorResponse('Unauthenticated .', 401);
-
-        /*return $request->expectsJson()
-            ? response()->json(['message' => 'Unauthenticated.'], 401)
-            : redirect()->guest(route('authentication.index'));*/
-
 
     }
 
