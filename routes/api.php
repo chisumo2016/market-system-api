@@ -46,6 +46,7 @@ Route::resource('products' ,'Product\ProductController', ['only' => ['index' , '
 */
 
 Route::resource('sellers' ,'Seller\SellerController', ['only' => ['index' , 'show']]);
+Route::resource('sellers.transactions' ,'Seller\SellerTransactionController', ['only' => ['index' , 'show']]);
 
 /*
 * API Routes  - Transactions
