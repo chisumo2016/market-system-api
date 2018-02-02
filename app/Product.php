@@ -20,7 +20,7 @@ class Product extends Model
     const UNVAILABLE_PRODUCT = 'unavailable';
 
     protected  $fillable = ['name', 'description', 'quantity', 'status','image', 'seller_id'];
-
+    protected  $hidden = ['pivot'];
 
     //Product is available
 
