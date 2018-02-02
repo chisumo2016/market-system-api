@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Product;
 
+use App\Http\Controllers\ApiController;
+use App\Product;
 use Illuminate\Http\Request;
-use App\Http\Controllers\ApiController;  //use App\Http\Controllers\Controller;
-
+use App\Http\Controllers\Controller;
 
 class ProductController extends ApiController
 {
@@ -16,6 +17,8 @@ class ProductController extends ApiController
     public function index()
     {
         //
+        $products = Product::all();
+        return $this->showAll($products);
     }
 
     /**
@@ -42,10 +45,10 @@ class ProductController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
         //
     }
@@ -53,10 +56,10 @@ class ProductController extends ApiController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
         //
     }
@@ -65,10 +68,10 @@ class ProductController extends ApiController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
         //
     }
@@ -76,10 +79,10 @@ class ProductController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
         //
     }
