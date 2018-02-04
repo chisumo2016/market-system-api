@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Foundation\Testing\HttpException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class sellerProductController extends ApiController
 {
@@ -140,7 +141,11 @@ class sellerProductController extends ApiController
     {
         //
         $this->checkSeller($seller, $product);
+
+
         $product->delete();
+
+        Storage::delete($product->image);
 
         return $this->showOne($product);
     }
