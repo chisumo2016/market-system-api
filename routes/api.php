@@ -44,6 +44,8 @@ Route::resource('products.buyers' ,'Product\ProductBuyersController', ['only' =>
 Route::resource('products.transactions' ,'Product\ProductTransactionController', ['only' => ['index' ]]);
 Route::resource('products.categories' ,'Product\ProductCategoryController', ['only' => ['index' , 'update', 'destroy' ]]);
 
+Route::resource('products.buyers.transactions' ,'Product\ProductBuyerTransactionController', ['only' => ['store' ]]);
+
 /*
 * API Routes  - Sellers
 */
