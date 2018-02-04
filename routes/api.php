@@ -40,6 +40,7 @@ Route::resource('categories.transactions' ,'Category\CategoryTransactionControll
 */
 
 Route::resource('products' ,'Product\ProductController', ['only' => ['index' , 'show']]);
+Route::resource('products.transactions' ,'Product\ProductTransactionController', ['only' => ['index' ]]);
 
 /*
 * API Routes  - Sellers
