@@ -136,11 +136,17 @@ class sellerProductController extends ApiController
      * @param  \App\Seller  $seller
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Seller $seller)
+    public function destroy(Seller $seller, Product $product)
     {
         //
+        $this->checkSeller($seller, $product);
+        $product->delete();
+
+        return $this->showOne($product);
     }
 
+
+    //Method to check
     protected  function checkSeller(Seller $seller, Product $product)
     {
         if($seller->id != $product->seller_id){
