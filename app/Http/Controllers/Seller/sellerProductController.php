@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\ApiController;
+use App\Product;
 use App\Seller;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -37,9 +39,30 @@ class sellerProductController extends ApiController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, User $seller)
     {
         //
+        $rules = [
+            'name'         => 'required',
+            'description'  => 'required',
+            'quantity'     => 'required|integer|min:1',
+            'image'         => 'required|image',
+        ];
+        //validate
+        $this->validate($request, $rules);
+
+        //Show evertthing is ok
+        $data = $request->all();
+
+        $data['status'] = Product::UNVAILABLE_PRODUCT;
+        $data['image']  =  '1.jpg';
+        $data['seller_id'] = $seller->id;
+
+        $product = Product::create($data);
+
+        return $this->showOne($product);
+
+
     }
 
     /**
