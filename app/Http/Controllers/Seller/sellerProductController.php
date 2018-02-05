@@ -122,7 +122,7 @@ class sellerProductController extends ApiController
                 return $this->errorResponse('An active product must have at least one category', 409);
             }
         }
-        
+
         //Image Update the image
 
         if($request->hasFile('image')){
