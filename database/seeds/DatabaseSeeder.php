@@ -29,6 +29,13 @@ class DatabaseSeeder extends Seeder
         //Pivot Table
         DB::table('category_product')->truncate();
 
+
+        User::flushEventListeners();
+        Category::flushEventListeners();
+        Product::flushEventListeners();
+        Transaction::flushEventListeners();
+
+
         //Define some variable to show how much user
 
         $usersQuantity = 1000;
