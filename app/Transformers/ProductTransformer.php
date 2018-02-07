@@ -26,7 +26,35 @@ class ProductTransformer extends TransformerAbstract
             'creationDate' => (string)$product->created_at,
             'lastChange' => (string)$product->updated_at,
             'deletedDate' => isset($product->deleted_at) ? (string) $product->deleted_at : null ,
-        ];
+
+
+            //HATEOAS
+            'links' => [
+                [
+                    'rel' => 'self',
+                    'href' => route('products.show', $product->id),
+                ],
+                [
+                    'rel' => '$product.buyers',
+                    'href' => route('products.buyers.index',$product->id ),
+                ],
+
+                [
+                    'rel' => '$product.categories',
+                    'href' => route('products.categories.index',$product->id ),
+                ],
+
+                [
+                    'rel' => 'product.transactions',
+                    'href' => route('products.transactions.index',$product->id ),
+                ],
+
+                [
+                    'rel' => 'product.seller',
+                    'href' => route('sellers.show',$product->seller_id ),
+                ],
+            ]
+       ];
     }
 
     public static function  originalAttribute($index)
@@ -48,4 +76,8 @@ class ProductTransformer extends TransformerAbstract
         return isset($attribute[$index]) ? $attribute[$index] : null;
 
     }
+
+
+
+
 }
