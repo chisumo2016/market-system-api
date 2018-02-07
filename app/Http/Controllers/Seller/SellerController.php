@@ -16,7 +16,7 @@ class SellerController extends ApiController
     public function index()
     {
         //
-        $seller = Seller::has('products')->get();
+         $seller = Seller::has('products')->get();
          return $this->showAll($seller);
 
         //return response()->json(['data' => $seller], 200);

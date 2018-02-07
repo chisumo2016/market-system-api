@@ -26,6 +26,7 @@ class sellerBuyerController extends ApiController
             ->pluck('buyer')
             ->unique('id')
             ->values();
+
         return $this->showAll($buyer);
     }
 
