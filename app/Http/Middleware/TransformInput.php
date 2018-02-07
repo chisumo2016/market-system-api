@@ -23,7 +23,7 @@ class TransformInput
         }
 
         $request->replace($transformedInput);
-        
+
         return $next($request);
     }
 }
