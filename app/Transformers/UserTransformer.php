@@ -61,17 +61,16 @@ class UserTransformer extends TransformerAbstract
     }
 
 
-
     //Improving Transformation  // revert the order of the above array
     public static function  transformedAttribute($index)
     {
         $attribute =  [
             //
-            'id ' => 'identifier',
+            'id' => 'identifier',
             'name' =>'name',
             'email' => 'email',
-            'verified' => 'isVerified',
-            'admin ' => 'isAdmin',
+            'verified' =>'isVerified',
+            'admin' => 'isAdmin',
             'created_at' =>'creationDate',
             'updated_at' => 'lastChange',
             'deleted_at' => 'deletedDate',
