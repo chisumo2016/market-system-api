@@ -35,12 +35,12 @@ class ProductTransformer extends TransformerAbstract
                     'href' => route('products.show', $product->id),
                 ],
                 [
-                    'rel' => '$product.buyers',
+                    'rel' => 'product.buyers',
                     'href' => route('products.buyers.index',$product->id ),
                 ],
 
                 [
-                    'rel' => '$product.categories',
+                    'rel' => 'product.categories',
                     'href' => route('products.categories.index',$product->id ),
                 ],
 
@@ -50,7 +50,7 @@ class ProductTransformer extends TransformerAbstract
                 ],
 
                 [
-                    'rel' => 'product.seller',
+                    'rel' => 'seller',
                     'href' => route('sellers.show',$product->seller_id ),
                 ],
             ]
