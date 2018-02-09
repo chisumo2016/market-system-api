@@ -93,12 +93,13 @@ class Handler extends ExceptionHandler
            $errorCode =  $exception -> errorInfo[1];
 
            if ($errorCode == 1451) {
-               return $this->errorResponse('Cannot remove this resource permanetly  . It is related  with other resource ', 409);
+
+               return $this->errorResponse('Cannot remove this resource permanently  . It is related  with other resource ', 409);
            }
         }
 
         if($exception instanceof  TokenMismatchException){
-            
+
             return redirect()->back()->withInput($request->input());
         }
 
@@ -114,6 +115,9 @@ class Handler extends ExceptionHandler
      // Handling AuthenticationException
     protected function unauthenticated($request, AuthenticationException $exception)
     {
+        if($this->isFrontend($request)){
+           return redirect() ->guest('login');
+        }
         return $this->errorResponse('Unauthenticated .', 401);
 
     }
@@ -128,8 +132,20 @@ class Handler extends ExceptionHandler
     protected function convertValidationExceptionToResponse(validationException $e, $request)
     {
         $errors = $e->validator->errors()->getMessages();
+
+        //returning the HTML and redirection
+        if($this->isFrontend($request)){
+            return $request->ajax() ? response()->json($errors, 422) : redirect()->back()
+                ->withInput($request)
+                ->withErrors($errors);
+        }
          return $this->errorResponse($errors, 422);
          //return response()->json($errors, 422);
+    }
+
+    private  function  isFrontend($request)
+    {
+        return $request->acceptsHtml() && collect($request->route()->middleware())->contains('web');
     }
 
 
