@@ -6,7 +6,7 @@ use App\Category;
 use App\Http\Controllers\ApiController;
 use App\Transformers\CategoryTransformer;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+
 
 class CategoryController extends ApiController
 {
@@ -54,7 +54,9 @@ class CategoryController extends ApiController
             'name' => 'required',
             'description' => 'required',
         ];
+
         $this->validate($request, $rules);
+
         $newCategory = Category::create($request->all());
 
         return $this->showOne($newCategory, 201);
@@ -95,7 +97,7 @@ class CategoryController extends ApiController
     {
         //
         $category->fill($request->only([
-            'name' ,
+            'name',
             'description'
         ]));
 

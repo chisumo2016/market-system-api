@@ -44,11 +44,12 @@ trait  ApiResponser
     {
         $transformer = $instance->transformer;
 
-        $instance->transformData($instance, $transformer);
+        $instance = $this->transformData($instance, $transformer);
 
         return $this->successResponse($instance, $code);     //return $this->successResponse(['data' => $instance], $code)
 
     }
+
 
     protected  function showMessage($message, $code =200)
     {

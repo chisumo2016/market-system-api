@@ -48,17 +48,13 @@ class CategoryTransformer extends TransformerAbstract
                     'rel' => 'category.transactions',
                     'href' => route('categories.transactions.index',$category->id ),
                 ],
-
-
-
-
             ]
         ];
     }
 
     public static function  originalAttribute($index)
     {
-        $attribute =  [
+        $attributes =  [
             //
             'identifier' => 'id',
             'title' => 'name',
@@ -68,13 +64,13 @@ class CategoryTransformer extends TransformerAbstract
             'deletedDate' => 'deleted_at',
         ];
 
-        return isset($attribute[$index]) ? $attribute[$index] : null;
+        return isset($attributes[$index]) ? $attributes[$index] : null;
 
     }
 
     public static function  transformedAttribute($index)
     {
-        $attribute =  [
+        $attributes =  [
             //
             'id' => 'identifier',
             'name' => 'title',
@@ -84,7 +80,7 @@ class CategoryTransformer extends TransformerAbstract
             'deleted_at' => 'deletedDate',
         ];
 
-        return isset($attribute[$index]) ? $attribute[$index] : null;
+        return isset($attributes[$index]) ? $attributes[$index] : null;
 
     }
 }
