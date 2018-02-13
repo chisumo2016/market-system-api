@@ -9,6 +9,11 @@ use App\Http\Controllers\Controller;
 
 class CategoryrProductController extends ApiController
 {
+
+    public function  __construct()
+    {
+        $this->middleware('client.credentials:')->only(['index']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +21,7 @@ class CategoryrProductController extends ApiController
      */
     public function index(Category $category)
     {
+
         //
         $products = $category->products;
         return $this->showAll($products);
