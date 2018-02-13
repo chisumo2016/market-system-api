@@ -43,7 +43,6 @@ Route::resource('products' ,'Product\ProductController', ['only' => ['index' , '
 Route::resource('products.buyers' ,'Product\ProductBuyersController', ['only' => ['index' ]]);
 Route::resource('products.transactions' ,'Product\ProductTransactionController', ['only' => ['index' ]]);
 Route::resource('products.categories' ,'Product\ProductCategoryController', ['only' => ['index' , 'update', 'destroy' ]]);
-
 Route::resource('products.buyers.transactions' ,'Product\ProductBuyerTransactionController', ['only' => ['store' ]]);
 
 /*
@@ -73,7 +72,7 @@ Route::name('verify')->get('users/verify/{token}', 'User\UserController@verify')
 Route::name('resend')->get('users/{user}/resend', 'User\UserController@resend');
 
 
-
+Route::post('oauth/token' , '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken ');
 
 
 

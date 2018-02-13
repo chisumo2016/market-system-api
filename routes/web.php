@@ -12,7 +12,7 @@
 */
 
 
-Auth::routes();
+//Auth::routes();
 
 
 // Authentication Routes...
