@@ -7,7 +7,7 @@ use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CategoryrProductController extends ApiController
+class CategoryProductController extends ApiController
 {
 
     public function  __construct()
