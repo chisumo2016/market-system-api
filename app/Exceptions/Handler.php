@@ -147,5 +147,5 @@ class Handler extends ExceptionHandler
     {
         return $request->acceptsHtml() && collect($request->route()->middleware())->contains('web');
     }
-    
+
 }
