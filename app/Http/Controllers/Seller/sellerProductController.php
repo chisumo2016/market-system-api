@@ -8,6 +8,7 @@ use App\Seller;
 
 use App\Transformers\ProductTransformer;
 use App\User;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Testing\HttpException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,7 +21,8 @@ class sellerProductController extends ApiController
         parent::__construct();
 
         $this->middleware('transform.input:' . ProductTransformer::class)->only(['store', 'update']);
-        $this->middleware('scope:manage-products');
+        $this->middleware('scope:manage-products')->except('index');
+
     }
     /**
      * Display a listing of the resource.
@@ -30,8 +32,13 @@ class sellerProductController extends ApiController
     public function index(Seller $seller)
     {
         //
-        $products = $seller->products;
-        return $this->showAll($products);
+        if(request()->user()->tokenCan('read-general') ||  request()->user()->tokenCan('manage-products')){
+            $products = $seller->products;
+            return $this->showAll($products);
+        }
+
+        throw new AuthorizationException("Invalid scope(s)");
+
     }
 
     /**
