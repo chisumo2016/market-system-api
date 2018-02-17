@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Buyer;
+use App\Policies\ProductPolicy;
 use App\Policies\TransactionPolicy;
+use App\Product;
 use App\Seller;
 use App\Transaction;
 use App\User;
@@ -28,6 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         Seller::class => SellerPolicy::class,
         User::class => UserPolicy::class,
         Transaction::class => TransactionPolicy::class,
+        Product::class => ProductPolicy::class,
     ];
 
     /**
