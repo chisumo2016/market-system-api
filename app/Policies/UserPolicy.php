@@ -46,7 +46,6 @@ class UserPolicy
     public function delete(User $authenticatedUser, User $user)
     {
         //
-        return $authenticatedUser->id === $user->id && $authenticatedUser->token()->client->
-            personal_access_client;
+        return $authenticatedUser->id === $user->id && $authenticatedUser->token()->client->personal_access_client;
     }
 }
