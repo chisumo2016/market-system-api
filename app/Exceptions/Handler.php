@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use App\Traits\ApiResponser;
+use Asm89\Stack\CorsService;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
@@ -63,15 +64,25 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        //
+        $response = $this->handleException($request ,$exception);
 
-            if ($exception instanceof  ValidationException){
-                return $this->convertValidationExceptionToResponse($exception, $request);
-            }
+        app(CorsService::class)->addActualRequestHeaders($response, $request);
 
-            if($exception instanceof  ModelNotFoundException){ // Handle the Model
-                $modelName = strtolower(class_basename($exception->getModel()));
-                return $this->errorResponse("Does not exists any {$modelName} with the specified identificator", 404);
-            }
+        return $response;
+    }
+
+    public function  handleException($request, Exception $exception)
+    {
+
+        if ($exception instanceof  ValidationException){
+            return $this->convertValidationExceptionToResponse($exception, $request);
+        }
+
+        if($exception instanceof  ModelNotFoundException){ // Handle the Model
+            $modelName = strtolower(class_basename($exception->getModel()));
+            return $this->errorResponse("Does not exists any {$modelName} with the specified identificator", 404);
+        }
 
         if($exception instanceof  AuthorizationException){ // Handle the Authorization
             return $this->errorResponse($exception->getMessage(), 403);
@@ -90,12 +101,12 @@ class Handler extends ExceptionHandler
         }
 
         if($exception instanceof  QueryException){ // Handle the Query
-           $errorCode =  $exception -> errorInfo[1];
+            $errorCode =  $exception -> errorInfo[1];
 
-           if ($errorCode == 1451) {
+            if ($errorCode == 1451) {
 
-               return $this->errorResponse('Cannot remove this resource permanently  . It is related  with other resource ', 409);
-           }
+                return $this->errorResponse('Cannot remove this resource permanently  . It is related  with other resource ', 409);
+            }
         }
 
         if($exception instanceof  TokenMismatchException){
@@ -107,9 +118,6 @@ class Handler extends ExceptionHandler
             return parent::render($request, $exception);
         }
         return $this->errorResponse('Unexpected Exception.  Try later', 500);
-
-        //
-
     }
 
      // Handling AuthenticationException

@@ -102,7 +102,7 @@ class CategoryController extends ApiController
     {
         //
         $this->allowedAdminAction();
-        $category->fill($request->only([
+        $category->fill($request->only([  // intecept
             'name',
             'description'
         ]));

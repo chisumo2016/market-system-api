@@ -28,3 +28,5 @@ class ProductBuyerController extends ApiController
       return $this->showAll($buyers);
   }
 }
+
+//8080/product/2/buyers

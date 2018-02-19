@@ -25,37 +25,40 @@ class SellerPolicy
     }
 
     /**
-     * Determine whether the user can create sellers.
+     * Determine whether the user can sell product.
      *
      * @param  \App\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function sale(User $user, User $seller)
     {
         //
+        return $user->id === $seller->id;
     }
 
     /**
-     * Determine whether the user can update the seller.
+     * Determine whether the user can update a product.
      *
      * @param  \App\User  $user
      * @param  \App\Seller  $seller
      * @return mixed
      */
-    public function update(User $user, Seller $seller)
+    public function editProduct(User $user, Seller $seller)
     {
         //
+        return $user->id === $seller->id;
     }
 
     /**
-     * Determine whether the user can delete the seller.
+     * Determine whether the user can delete a product.
      *
      * @param  \App\User  $user
      * @param  \App\Seller  $seller
      * @return mixed
      */
-    public function delete(User $user, Seller $seller)
+    public function deleteProduct(User $user, Seller $seller)
     {
         //
+        return $user->id === $seller->id;
     }
 }
