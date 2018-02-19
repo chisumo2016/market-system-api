@@ -35,6 +35,7 @@ class UserController extends ApiController
     public function index()
     {
         //
+        $this->allowedAdminAction();
         $users = User::all();
         return $this->showAll($users);
         //return  response()->json(['data' => $users], 200);  //return $users;
@@ -119,6 +120,7 @@ class UserController extends ApiController
         //
         //$user = User:: findOrFail($id);  //Bse of Model Binding
 
+
         $rules = [
             'email' => 'email|unique:users, email' . $user->id,
             'password' => 'min:6|confirmed',
@@ -139,6 +141,9 @@ class UserController extends ApiController
         }
 
         if ($request->has('admin')){
+
+            $this->allowedAdminAction();
+            
             if (!$user ->isVerified()) {
 
                     return $this->errorResponse('Only verified users can modify the admin field ', 409);

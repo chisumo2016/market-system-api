@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Buyer;
 
 use App\Buyer;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
-use App\Http\Controllers\ApiController;//use App\Http\Controllers\Controller;
+use App\Http\Controllers\ApiController;
+use Illuminate\Support\Facades\Gate;//use App\Http\Controllers\Controller;
 
 class BuyerController extends ApiController    // class BuyerController extends Controller
 {
@@ -22,7 +24,8 @@ class BuyerController extends ApiController    // class BuyerController extends 
      */
     public function index()
     {
-        //
+
+        $this->allowedAdminAction();
         $buyers = Buyer::has('transactions')->get();
         return $this->showAll($buyers);
 
